@@ -147,8 +147,7 @@ clean_exit() {
         cd $startdir > /dev/null || exit 1
     fi
     if [ ! -z $workdir ]; then
-        # rm -rf $workdir
-        echo "exit";
+        rm -rf $workdir
     fi
     exit $last_exit_code
 }
