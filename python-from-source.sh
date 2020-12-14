@@ -36,9 +36,10 @@ build_zlib() {
     wget https://zlib.net/zlib-$ZLIB_VERSION.tar.gz || clean_exit
     tar zxvf zlib-$ZLIB_VERSION.tar.gz || clean_exit
     cd zlib-$ZLIB_VERSION || clean_exit
-    ./configure --static --prefix=$workdir/deps || clean_exit
-    make -j || clean_exit
-    make install || clean_exit
+    zlib_cflags="-fPIC"
+    CFLAGS="$CFLAGS $zlib_cflags" ./configure --static --prefix=$workdir/deps || clean_exit
+    CFLAGS="$CFLAGS $zlib_cflags" make -j || clean_exit
+    CFLAGS="$CFLAGS $zlib_cflags" make install || clean_exit
     cd - > /dev/null || clean_exit
 }
 
